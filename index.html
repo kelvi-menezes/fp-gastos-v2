@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FP Servicos Terceirizados</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#0a5c47;--green2:#0f7a5f;--gl:#e4f5ef;--gp:#f0faf6;
+  --am:#b45309;--al:#fef3c7;--red:#991b1b;--rl:#fee2e2;
+  --bl:#1e40af;--bll:#dbeafe;--gr:#374151;--gm:#6b7280;
+  --glt:#f3f4f6;--gb:#e5e7eb;--bg:#f8fafc;--sf:#fff;
+  --font:'DM Sans',sans-serif;--mono:'DM Mono',monospace;
+  --r:10px;--rl2:16px;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--gr);font-size:14px}
+.hdr{background:var(--green);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:58px;position:sticky;top:0;z-index:100}
+.hbrand{display:flex;align-items:center;gap:10px}
+.hlogo{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;color:#fff}
+.hname{color:#fff;font-size:15px;font-weight:600}
+.hsub{color:rgba(255,255,255,.65);font-size:11px}
+.hdate{color:rgba(255,255,255,.6);font-size:12px;font-family:var(--mono)}
+.nav{background:var(--sf);border-bottom:1px solid var(--gb);display:flex;padding:0 1rem;overflow-x:auto}
+.nb{padding:11px 12px;border:none;background:none;cursor:pointer;font-family:var(--font);font-size:13px;font-weight:500;color:var(--gm);border-bottom:2.5px solid transparent;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.nb:hover{color:var(--gr)}
+.nb.on{color:var(--green);border-bottom-color:var(--green)}
+.nb svg{width:14px;height:14px}
+.pg{display:none;padding:1.25rem;max-width:1200px;margin:0 auto}
+.pg.on{display:block}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.25rem}
+.mc{background:var(--sf);border:1px solid var(--gb);border-radius:var(--r);padding:14px 16px}
+.ml{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--gm);margin-bottom:5px}
+.mv{font-size:20px;font-weight:600;color:var(--gr);font-family:var(--mono)}
+.mv.g{color:var(--green)} .mv.a{color:var(--am)}
+.ms{font-size:11px;color:var(--gm);margin-top:3px}
+.card{background:var(--sf);border:1px solid var(--gb);border-radius:var(--rl2);margin-bottom:1rem}
+.ch{padding:13px 16px;border-bottom:1px solid var(--gb);display:flex;align-items:center;justify-content:space-between}
+.ct{font-size:13px;font-weight:600;color:var(--gr);display:flex;align-items:center;gap:7px}
+.ct svg{width:14px;height:14px;color:var(--green)}
+.cb{padding:14px 16px}
+.fg{display:grid;gap:10px}
+.fg.c2{grid-template-columns:1fr 1fr}
+.fg.c3{grid-template-columns:1fr 1fr 1fr}
+.fg.c4{grid-template-columns:1fr 1fr 1fr 1fr}
+.f{display:flex;flex-direction:column;gap:4px}
+.f label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--gm)}
+.f input,.f select{width:100%;padding:8px 10px;font-size:13px;font-family:var(--font);border:1px solid var(--gb);border-radius:var(--r);background:#fff;color:var(--gr)}
+.f input:focus,.f select:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(10,92,71,.08)}
+.fa{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+.btn{padding:8px 16px;border-radius:var(--r);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:6px;border:1px solid transparent}
+.btn-p{background:var(--green);color:#fff}
+.btn-p:hover{background:var(--green2)}
+.btn-p:disabled{opacity:.5;cursor:not-allowed}
+.btn-o{background:#fff;color:var(--gr);border-color:var(--gb)}
+.btn-o:hover{background:var(--glt)}
+.btn-g{background:none;border:none;color:var(--gm);padding:5px 7px;cursor:pointer}
+.btn-g:hover{background:var(--glt);color:var(--red)}
+.btn-sm{padding:5px 10px;font-size:12px}
+.bt{background:var(--gl);color:var(--green);border:1px solid rgba(10,92,71,.2);font-size:12px;padding:5px 10px;border-radius:6px;cursor:pointer;font-family:var(--font);font-weight:600}
+.bt:hover{background:var(--green);color:#fff}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{padding:9px 11px;text-align:left;font-size:11px;text-transform:uppercase;color:var(--gm);font-weight:600;border-bottom:2px solid var(--gb);background:var(--glt)}
+tbody td{padding:9px 11px;border-bottom:1px solid var(--gb)}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:var(--glt)}
+.tm{font-family:var(--mono);font-size:12px}
+.badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600}
+.bc{background:var(--gl);color:var(--green)}
+.ba{background:var(--al);color:var(--am)}
+.bt2{background:var(--bll);color:var(--bl)}
+.bi{background:var(--rl);color:var(--red)}
+.bo{background:var(--glt);color:var(--gm)}
+.dh{background:#ede9fe;border:1px solid rgba(91,33,182,.2);border-radius:var(--r);padding:9px 13px;margin-top:8px;font-size:12px;color:#5b21b6;display:none}
+.dp{background:var(--al);border:1px solid rgba(180,83,9,.2);border-radius:var(--r);padding:10px 14px;margin-top:8px;display:none;font-size:13px;align-items:center;gap:10px;flex-wrap:wrap}
+.dp strong{font-family:var(--mono);font-size:14px;color:var(--am)}
+.fl{display:flex;flex-direction:column;gap:8px}
+.fi{background:var(--sf);border:1px solid var(--gb);border-radius:var(--r);padding:12px 14px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.fi:hover{border-color:var(--green);background:var(--gp)}
+.av{width:38px;height:38px;border-radius:50%;background:var(--gl);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--green);flex-shrink:0}
+.fn{font-weight:600;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fr{font-size:11px;color:var(--gm)}
+.ft{text-align:right;flex-shrink:0}
+.fv{font-family:var(--mono);font-size:14px;font-weight:600}
+.fc{font-size:11px;color:var(--gm)}
+.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;padding:1rem}
+.mbg.on{display:flex}
+.mdl{background:var(--sf);border-radius:var(--rl2);width:580px;max-width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.mh{padding:14px 18px;border-bottom:1px solid var(--gb);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--sf)}
+.mt{font-size:15px;font-weight:600}
+.mb2{padding:16px 18px}
+.bc2{display:flex;flex-direction:column;gap:10px}
+.br{display:flex;align-items:center;gap:10px}
+.blab{font-size:12px;min-width:110px;color:var(--gm)}
+.btr{flex:1;height:8px;background:var(--glt);border-radius:4px;overflow:hidden}
+.bf{height:100%;border-radius:4px;background:var(--green)}
+.bf.am{background:var(--am)} .bf.rd{background:var(--red)} .bf.bl2{background:#3b82f6}
+.bv{font-family:var(--mono);font-size:12px;min-width:85px;text-align:right}
+.empty{text-align:center;padding:2rem;color:var(--gm);font-size:13px}
+.thoje{font-size:10px;background:var(--green);color:#fff;padding:2px 7px;border-radius:10px;font-weight:600;vertical-align:middle;margin-left:5px}
+.sl{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--gm);font-weight:600;margin-bottom:8px}
+.toast{position:fixed;bottom:20px;right:20px;color:#fff;padding:10px 16px;border-radius:var(--r);font-size:13px;font-weight:500;box-shadow:0 4px 20px rgba(0,0,0,.2);z-index:999;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none}
+.toast.on{opacity:1;transform:translateY(0)}
+.qb{background:var(--gp);border:1px solid rgba(10,92,71,.15);border-radius:var(--r);padding:11px 14px;margin-bottom:1.25rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fb{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:flex-end}
+.fb select,.fb input[type=date]{padding:6px 9px;font-size:12px;border:1px solid var(--gb);border-radius:8px;background:#fff;color:var(--gr);font-family:var(--font)}
+.fb label{font-size:11px;color:var(--gm);font-weight:600;display:block;margin-bottom:3px}
+.sb{background:var(--gp);border-radius:var(--r);padding:10px 14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-size:13px}
+.sb strong{font-family:var(--mono);font-size:14px;color:var(--green)}
+.ld{text-align:center;padding:2rem;color:var(--gm);font-size:13px}
+.dberr{background:#fee2e2;border:1px solid #fca5a5;border-radius:var(--r);padding:14px;color:#991b1b;font-size:13px;margin-bottom:1rem}
+.tc{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.fg.c3,.fg.c4,.tc{grid-template-columns:1fr 1fr}}
+@media(max-width:400px){.fg.c2,.fg.c3,.fg.c4,.tc{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<header class="hdr">
+  <div class="hbrand">
+    <div class="hlogo">FP</div>
+    <div><div class="hname">FP Servicos Terceirizados</div><div class="hsub">Controle de Gastos</div></div>
+  </div>
+  <div class="hdate" id="hdate"></div>
+</header>
+<nav class="nav">
+  <button class="nb on" onclick="pg('dashboard',this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</button>
+  <button class="nb" onclick="pg('lancar',this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Lancar</button>
+  <button class="nb" onclick="pg('historico',this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Historico</button>
+  <button class="nb" onclick="pg('ipi',this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>IPI</button>
+  <button class="nb" onclick="pg('func',this)"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Funcionarios</button>
+</nav>
+<div id="page-dashboard" class="pg on">
+  <div id="db-warn"></div>
+  <div class="metrics" id="dash-m"><div class="ld">Carregando...</div></div>
+  <div class="tc">
+    <div class="card"><div class="ch"><span class="ct">Por Categoria</span></div><div class="cb"><div id="dash-c"><div class="ld">...</div></div></div></div>
+    <div class="card"><div class="ch"><span class="ct">Top Funcionarios</span></div><div class="cb"><div id="dash-f"><div class="ld">...</div></div></div></div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="ct">Ultimos Lancamentos</span><button class="btn btn-o btn-sm" onclick="pg('lancar',document.querySelectorAll('.nb')[1])">+ Novo</button></div>
+    <div class="cb" style="padding:0"><div class="tw"><div id="dash-r"><div class="ld">...</div></div></div></div>
+  </div>
+</div>tton></div>
+    <div class="cb" style="padding:0"><div class="tw"><div id="dash-r"><div class="ld">...</div></div></div></div>
+  </div>
+</div>
+
+<!-- LANCAR -->
+<div id="page-lancar" class="pg">
+  <div class="qb">
+    <span style="font-size:12px;font-weight:600;color:var(--green)">Lancamento rapido</span>
+    <button class="bt" onclick="setHoje()">Usar hoje</button>
+    <span style="font-size:12px;color:var(--green)">Salve com Enter ou o botao</span>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="ct">Novo Gasto</span></div>
+    <div class="cb">
+      <div class="fg c4">
+        <div class="f"><label>Data</label><input type="date" id="g-data"></div>
+        <div class="f"><label>Categoria</label>
+          <select id="g-cat" onchange="onCat()">
+            <option value="custo">Custo Funcionario</option>
+            <option value="alimentacao">Alimentacao</option>
+            <option value="transporte">Transporte</option>
+            <option value="ipi">IPI</option>
+            <option value="outros">Outros</option>
+          </select>
+        </div>
+        <div class="f" id="ipi-grp" style="display:none"><label>Tipo IPI</label>
+          <select id="g-ipi"><option value="">Selecione...</option></select>
+        </div>
+        <div class="f"><label>Valor (R$)</label><input type="number" id="g-val" placeholder="0,00" step="0.01" min="0" onkeydown="if(event.key==='Enter')salvar()"></div>
+        <div class="f"><label>Funcionario</label>
+          <select id="g-func" onchange="onFunc()"><option value="">— Geral —</option></select>
+        </div>
+      </div>
+      <div class="fg c2" style="margin-top:10px">
+        <div class="f"><label>Descricao</label><input type="text" id="g-desc" placeholder="Detalhes..." onkeydown="if(event.key==='Enter')salvar()"></div>
+        <div class="f"><label>Observacao</label><input type="text" id="g-obs" placeholder="Nota extra..."></div>
+      </div>
+      <div class="dh" id="g-dh">Diarista detectado — valor da diaria (<strong id="g-dhv"></strong>) preenchido automaticamente.</div>
+      <div class="fa">
+        <button class="btn btn-o" onclick="limpar()">Limpar</button>
+        <button class="btn btn-p" id="btn-s" onclick="salvar()">Salvar Lancamento</button>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="ct">Lancamentos de Hoje</span><span id="tt" style="font-family:var(--mono);font-size:14px;font-weight:700;color:var(--green)"></span></div>
+    <div class="cb" style="padding:0"><div class="tw"><div id="hoje-l"></div></div></div>
+  </div>
+</div>
+<!-- HISTORICO -->
+<div id="page-historico" class="pg">
+  <div class="card">
+    <div class="ch"><span class="ct">Filtros</span></div>
+    <div class="cb">
+      <div class="fb">
+        <div><label>De</label><input type="date" id="f-de" onchange="rHist()"></div>
+        <div><label>Ate</label><input type="date" id="f-ate" onchange="rHist()"></div>
+        <div><label>Categoria</label>
+          <select id="f-cat" onchange="rHist()">
+            <option value="">Todas</option>
+            <option value="custo">Custo Funcionario</option>
+            <option value="alimentacao">Alimentacao</option>
+            <option value="transporte">Transporte</option>
+            <option value="ipi">IPI</option>
+            <option value="outros">Outros</option>
+          </select>
+        </div>
+        <div><label>Funcionario</label><select id="f-func" onchange="rHist()"><option value="">Todos</option></select></div>
+        <div><button class="btn btn-o btn-sm" onclick="limFilt()">Limpar</button></div>
+      </div>
+      <div id="h-sum"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="ct">Lancamentos</span><span id="h-ct" style="font-size:12px;color:var(--gm)"></span></div>
+    <div class="cb" style="padding:0"><div class="tw"><div id="h-tbl"><div class="ld">Carregando...</div></div></div></div>
+  </div>
+</div>
+<!-- IPI -->
+<div id="page-ipi" class="pg">
+  <div class="card">
+    <div class="ch"><span class="ct">Categorias de IPI</span></div>
+    <div class="cb">
+      <div class="fg c3">
+        <div class="f" style="grid-column:span 2"><label>Nome da categoria</label><input type="text" id="ipi-n" placeholder="Ex: Material de Limpeza, EPI..." onkeydown="if(event.key==='Enter')addIpi()"></div>
+        <div class="f"><label>&nbsp;</label><button class="btn btn-p" style="width:100%" onclick="addIpi()">+ Adicionar</button></div>
+      </div>
+      <hr style="border:none;border-top:1px solid var(--gb);margin:12px 0">
+      <div id="ipi-l"></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="ch"><span class="ct">Gastos por Tipo IPI</span></div>
+    <div class="cb"><div id="ipi-b"></div></div>
+  </div>
+</div>
+<!-- FUNCIONARIOS -->
+<div id="page-func" class="pg">
+  <div class="card">
+    <div class="ch"><span class="ct">Cadastrar Funcionario</span></div>
+    <div class="cb">
+      <div class="fg c4">
+        <div class="f"><label>Nome completo</label><input type="text" id="fn-n" placeholder="Nome do funcionario"></div>
+        <div class="f"><label>Cargo</label><input type="text" id="fn-c" placeholder="Ex: Auxiliar..."></div>
+        <div class="f"><label>Tipo Remuneracao</label>
+          <select id="fn-t" onchange="onFnT()">
+            <option value="mensal">Mensal (salario fixo)</option>
+            <option value="diaria">Diaria</option>
+          </select>
+        </div>
+        <div class="f"><label id="fn-vl">Salario base (R$)</label><input type="number" id="fn-s" placeholder="0,00" step="0.01" min="0" oninput="onFnV()"></div>
+      </div>
+      <div class="dp" id="fn-dp">
+        <span>Dias/mes estimado:</span>
+        <input type="number" id="fn-d" value="22" min="1" max="31" step="1" style="width:70px;padding:5px 8px;font-size:13px;border:1px solid var(--gb);border-radius:8px" oninput="onFnV()">
+        <span>dias x</span>
+        <span id="fn-dv" style="font-family:var(--mono);font-size:13px;color:var(--am)">R$ 0,00</span>
+        <span>= estimado:</span>
+        <strong id="fn-dt">R$ 0,00</strong>
+      </div>
+      <div class="fa"><button class="btn btn-p" onclick="addFunc()">Cadastrar</button></div>
+    </div>
+  </div>
+  <div id="func-l"></div>
+</div>
+<div class="mbg" id="mdl" onclick="if(event.target===this)closeMdl()">
+  <div class="mdl">
+    <div class="mh"><span class="mt" id="mdl-t">Funcionario</span>
+      <button class="btn-g" onclick="closeMdl()"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18" height="18"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="mb2" id="mdl-b"></div>
+  </div>
+</div>
+<script>
+var S={F:[],G:[],I:[]};
+var CL={custo:'Custo Funcionario',alimentacao:'Alimentacao',transporte:'Transporte',ipi:'IPI',outros:'Outros'};
+var CB={custo:'bc',alimentacao:'ba',transporte:'bt2',ipi:'bi',outros:'bo'};
+var CC={custo:'g',alimentacao:'am',transporte:'bl2',ipi:'rd',outros:''};
+function fmt(v){return 'R$ '+parseFloat(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function fd(d){return new Date(d+'T12:00').toLocaleDateString('pt-BR')}
+function today(){return new Date().toISOString().slice(0,10)}
+function ini(n){return n.split(' ').filter(Boolean).slice(0,2).map(function(w){return w[0].toUpperCase()}).join('')}
+function fbi(id){return S.F.find(function(f){return f.id===+id})}
+document.getElementById('hdate').textContent=new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
+document.getElementById('g-data').value=today();
+function toast(m,e){var el=document.getElementById('toast');el.textContent=m;el.style.background=e?'#991b1b':'#0a5c47';el.classList.add('on');setTimeout(function(){el.classList.remove('on')},2500)}
+async function api(method,path,body){var o={method:method,headers:{'Content-Type':'application/json'}};if(body)o.body=JSON.stringify(body);var r=await fetch('/api'+path,o);if(!r.ok){var t=await r.text();throw new Error(t)}return r.json()}
+async function loadAll(){var r=await Promise.all([api('GET','/funcionarios'),api('GET','/gastos'),api('GET','/ipi-cats')]);S.F=r[0];S.G=r[1];S.I=r[2]}
+function pg(name,btn){document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on')});document.querySelectorAll('.nb').forEach(function(b){b.classList.remove('on')});document.getElementById('page-'+name).classList.add('on');if(btn)btn.classList.add('on');var m={dashboard:rDash,lancar:rLancar,historico:rHist,ipi:rIpi,func:rFunc};if(m[name])m[name]()}
+function popFS(){['g-func','f-func'].forEach(function(sid){var sel=document.getElementById(sid);if(!sel)return;var cur=sel.value;while(sel.options.length>1)sel.remove(1);S.F.forEach(function(f){var o=document.createElement('option');o.value=f.id;o.textContent=f.nome;sel.appendChild(o)});if(cur)sel.value=cur})}
+function popIpi(){var sel=document.getElementById('g-ipi');var cur=sel.value;while(sel.options.length>1)sel.remove(1);S.I.forEach(function(c){var o=document.createElement('option');o.value=c.nome;o.textContent=c.nome;sel.appendChild(o)});if(cur)sel.value=cur}
+function onCat(){var cat=document.getElementById('g-cat').value;document.getElementById('ipi-grp').style.display=cat==='ipi'?'flex':'none';if(cat==='ipi')popIpi();chkD()}
+function onFunc(){onCat()}
+function chkD(){var fid=parseInt(document.getElementById('g-func').value)||null;var cat=document.getElementById('g-cat').value;var h=document.getElementById('g-dh');if(fid&&cat==='custo'){var f=fbi(fid);if(f&&f.tipo==='diaria'&&f.salario>0){document.getElementById('g-val').value=parseFloat(f.salario).toFixed(2);document.getElementById('g-dhv').textContent=fmt(f.salario);h.style.display='block';return}}h.style.display='none'}
+function setHoje(){document.getElementById('g-data').value=today();document.getElementById('g-val').focus()}
+async function salvar(){var data=document.getElementById('g-data').value;var cat=document.getElementById('g-cat').value;var ipi=document.getElementById('g-ipi').value;var val=parseFloat(document.getElementById('g-val').value);var fid=parseInt(document.getElementById('g-func').value)||null;var desc=document.getElementById('g-desc').value.trim();var obs=document.getElementById('g-obs').value.trim();if(!data||isNaN(val)||val<=0){toast('Informe data e valor validos.',true);return}if(cat==='ipi'&&!ipi){toast('Selecione o tipo de IPI.',true);return}var btn=document.getElementById('btn-s');btn.disabled=true;btn.textContent='Salvando...';try{var g=await api('POST','/gastos',{data:data,cat:cat,ipi_sub:cat==='ipi'?ipi:'',valor:val,func_id:fid,descricao:desc,observacao:obs});if(fid){var f=fbi(fid);if(f)g.func_nome=f.nome}S.G.unshift(g);toast('Lancamento salvo!');limpar();rLancar()}catch(e){toast('Erro: '+e.message,true)}btn.disabled=false;btn.textContent='Salvar Lancamento'}
+function limpar(){document.getElementById('g-data').value=today();document.getElementById('g-cat').value='custo';document.getElementById('g-val').value='';document.getElementById('g-func').value='';document.getElementById('g-desc').value='';document.getElementById('g-obs').value='';document.getElementById('ipi-grp').style.display='none';document.getElementById('g-dh').style.display='none'}
+async function delG(id){if(!confirm('Remover este lancamento?'))return;try{await api('DELETE','/gastos/'+id);S.G=S.G.filter(function(g){return g.id!==id});rLancar();rHist();rDash();toast('Removido.')}catch(e){toast('Erro: '+e.message,true)}}
+function tbl(list,del){if(!list.length)return'<div class="empty">Nenhum lancamento encontrado</div>';var h='<table><thead><tr><th>Data</th><th>Categoria</th><th>Tipo IPI</th><th>Funcionario</th><th>Descricao</th><th>Obs</th><th style="text-align:right">Valor</th>'+(del?'<th></th>':'')+'</tr></thead><tbody>';var rows=list.map(function(g){var isH=g.data===today();var fn=g.func_nome||(g.func_id?((fbi(g.func_id)||{}).nome||null):null);var d=del?'<td><button class="btn-g btn-sm" onclick="delG('+g.id+')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></button></td>':'';return'<tr><td class="tm">'+fd(g.data)+(isH?'<span class="thoje">hoje</span>':'')+'</td><td><span class="badge '+(CB[g.cat]||'bo')+'">'+(CL[g.cat]||g.cat)+'</span></td><td style="color:var(--gm);font-size:12px">'+(g.ipi_sub||'—')+'</td><td>'+(fn||'<span style="color:var(--gm)">—</span>')+'</td><td style="color:var(--gm)">'+(g.descricao||'—')+'</td><td style="color:var(--gm);font-size:12px">'+(g.observacao||'—')+'</td><td style="text-align:right;font-family:var(--mono);font-weight:600">'+fmt(g.valor)+'</td>'+d+'</tr>';}).join('');return h+rows+'</tbody></table>'}
+function rLancar(){popFS();onCat();var tg=S.G.filter(function(g){return g.data===today()});var tt=tg.reduce(function(s,g){return s+parseFloat(g.valor)},0);document.getElementById('tt').textContent=tt>0?fmt(tt):'';document.getElementById('hoje-l').innerHTML=tg.length?tbl(tg,true):'<div class="empty">Nenhum lancamento hoje ainda.</div>'}
+function rDash(){var tot=S.G.reduce(function(s,g){return s+parseFloat(g.valor)},0);var hj=S.G.filter(function(g){return g.data===today()}).reduce(function(s,g){return s+parseFloat(g.valor)},0);var mes=today().slice(0,7);var mn=S.G.filter(function(g){return g.data.slice(0,7)===mes}).reduce(function(s,g){return s+parseFloat(g.valor)},0);document.getElementById('dash-m').innerHTML='<div class="mc"><div class="ml">Total Geral</div><div class="mv g">'+fmt(tot)+'</div><div class="ms">'+S.G.length+' lancamentos</div></div>'+'<div class="mc"><div class="ml">Este Mes</div><div class="mv a">'+fmt(mn)+'</div></div>'+'<div class="mc"><div class="ml">Hoje</div><div class="mv">'+fmt(hj)+'</div></div>'+'<div class="mc"><div class="ml">Funcionarios</div><div class="mv">'+S.F.length+'</div></div>';var bc={};S.G.forEach(function(g){bc[g.cat]=(bc[g.cat]||0)+parseFloat(g.valor)});var mx=Math.max.apply(null,[1].concat(Object.values(bc)));document.getElementById('dash-c').innerHTML=Object.entries(bc).sort(function(a,b){return b[1]-a[1]}).map(function(e){return'<div class="br"><span class="blab"><span class="badge '+(CB[e[0]]||'bo')+'">'+(CL[e[0]]||e[0])+'</span></span><div class="btr"><div class="bf '+(CC[e[0]]||'')+'" style="width:'+Math.round(e[1]/mx*100)+'%"></div></div><span class="bv">'+fmt(e[1])+'</span></div>'}).join('')||'<div class="empty">Nenhum dado</div>';var ft={};S.G.filter(function(g){return g.func_id}).forEach(function(g){ft[g.func_id]=(ft[g.func_id]||0)+parseFloat(g.valor)});document.getElementById('dash-f').innerHTML=Object.entries(ft).sort(function(a,b){return b[1]-a[1]}).slice(0,5).map(function(e){var f=fbi(e[0]);return f?'<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><div class="av" style="width:30px;height:30px;font-size:11px">'+ini(f.nome)+'</div><span style="flex:1;font-size:13px">'+f.nome+'</span><span style="font-family:var(--mono);font-size:12px;font-weight:600">'+fmt(e[1])+'</span></div>':''}).join('')||'<div class="empty">Nenhum dado</div>';document.getElementById('dash-r').innerHTML=tbl(S.G.slice(0,8),false)}
+function rHist(){popFS();var list=S.G.slice();var de=document.getElementById('f-de').value;var ate=document.getElementById('f-ate').value;var cat=document.getElementById('f-cat').value;var func=document.getElementById('f-func').value;if(de)list=list.filter(function(g){return g.data>=de});if(ate)list=list.filter(function(g){return g.data<=ate});if(cat)list=list.filter(function(g){return g.cat===cat});if(func)list=list.filter(function(g){return String(g.func_id)===func});var tot=list.reduce(function(s,g){return s+parseFloat(g.valor)},0);document.getElementById('h-ct').textContent=list.length+' registro'+(list.length!==1?'s':'');document.getElementById('h-sum').innerHTML=list.length?'<div class="sb"><span>'+list.length+' lancamento'+(list.length!==1?'s':'')+' filtrado'+(list.length!==1?'s':'')+'</span><strong>'+fmt(tot)+'</strong></div>':'';document.getElementById('h-tbl').innerHTML=tbl(list,true)}
+function limFilt(){['f-de','f-ate'].forEach(function(id){document.getElementById(id).value=''});['f-cat','f-func'].forEach(function(id){document.getElementById(id).value=''});rHist()}
+function rIpi(){document.getElementById('ipi-l').innerHTML=S.I.length?'<div style="display:flex;flex-direction:column;gap:8px">'+S.I.map(function(c){return'<div style="display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--glt);border-radius:var(--r)"><span class="badge bi">'+c.nome+'</span><span style="flex:1"></span><button class="btn-g btn-sm" onclick="delIpi('+c.id+')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14" height="14"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>'}).join('')+'</div>':'<div class="empty">Nenhuma categoria cadastrada</div>';var bs={};S.G.filter(function(g){return g.cat==='ipi'}).forEach(function(g){var k=g.ipi_sub||'Sem tipo';bs[k]=(bs[k]||0)+parseFloat(g.valor)});var ti=S.G.filter(function(g){return g.cat==='ipi'}).reduce(function(s,g){return s+parseFloat(g.valor)},0);var mx=Math.max.apply(null,[1].concat(Object.values(bs)));document.getElementById('ipi-b').innerHTML=Object.keys(bs).length?'<div style="margin-bottom:10px;font-family:var(--mono);font-size:14px;font-weight:600;color:var(--red)">Total IPI: '+fmt(ti)+'</div><div class="bc2">'+Object.entries(bs).sort(function(a,b){return b[1]-a[1]}).map(function(e){return'<div class="br"><span class="blab" style="font-size:12px">'+e[0]+'</span><div class="btr"><div class="bf rd" style="width:'+Math.round(e[1]/mx*100)+'%"></div></div><span class="bv">'+fmt(e[1])+'</span></div>'}).join('')+'</div>':'<div class="empty">Nenhum gasto IPI lancado</div>'}
+async function addIpi(){var n=document.getElementById('ipi-n').value.trim();if(!n){toast('Informe o nome.',true);return}try{var c=await api('POST','/ipi-cats',{nome:n});S.I.push(c);document.getElementById('ipi-n').value='';rIpi();toast('Categoria adicionada!')}catch(e){toast('Erro: '+e.message,true)}}
+async function delIpi(id){if(!confirm('Remover categoria?'))return;await api('DELETE','/ipi-cats/'+id);S.I=S.I.filter(function(c){return c.id!==id});rIpi();toast('Categoria removida.')}
+function onFnT(){var t=document.getElementById('fn-t').value;document.getElementById('fn-vl').textContent=t==='diaria'?'Valor da Diaria (R$)':'Salario base (R$)';document.getElementById('fn-dp').style.display=t==='diaria'?'flex':'none';onFnV()}
+function onFnV(){if(document.getElementById('fn-t').value!=='diaria')return;var v=parseFloat(document.getElementById('fn-s').value)||0;var d=parseInt(document.getElementById('fn-d').value)||22;document.getElementById('fn-dv').textContent=fmt(v);document.getElementById('fn-dt').textContent=fmt(v*d)}
+async function addFunc(){var n=document.getElementById('fn-n').value.trim();var c=document.getElementById('fn-c').value.trim();var t=document.getElementById('fn-t').value;var s=parseFloat(document.getElementById('fn-s').value)||0;if(!n){toast('Informe o nome.',true);return}try{var f=await api('POST','/funcionarios',{nome:n,cargo:c,tipo:t,salario:s});S.F.push(f);document.getElementById('fn-n').value='';document.getElementById('fn-c').value='';document.getElementById('fn-s').value='';document.getElementById('fn-t').value='mensal';onFnT();popFS();rFunc();toast('Funcionario cadastrado!')}catch(e){toast('Erro: '+e.message,true)}}
+async function delFunc(id){var f=fbi(id);if(!confirm('Remover "'+f.nome+'"?'))return;await api('DELETE','/funcionarios/'+id);S.F=S.F.filter(function(x){return x.id!==id});S.G=S.G.map(function(g){return g.func_id===id?Object.assign({},g,{func_id:null,func_nome:null}):g});popFS();rFunc();toast('Funcionario removido.')}
+function rFunc(){var el=document.getElementById('func-l');if(!S.F.length){el.innerHTML='<div class="card"><div class="cb"><div class="empty">Nenhum funcionario cadastrado</div></div></div>';return}el.innerHTML='<div class="fl">'+S.F.map(function(f){var tot=S.G.filter(function(g){return g.func_id===f.id}).reduce(function(s,g){return s+parseFloat(g.valor)},0);var ct=S.G.filter(function(g){return g.func_id===f.id}).length;var tl=f.tipo==='diaria'?'Diarista':'Mensalista';var tc=f.tipo==='diaria'?'#5b21b6':'var(--green)';var tb=f.tipo==='diaria'?'#ede9fe':'var(--gl)';var rl=f.tipo==='diaria'?'Diaria: '+fmt(f.salario):(f.salario>0?'Salario: '+fmt(f.salario):'');return'<div class="fi" onclick="openMdl('+f.id+')"><div class="av">'+ini(f.nome)+'</div><div style="flex:1;min-width:0"><div class="fn">'+f.nome+' <span style="background:'+tb+';color:'+tc+';font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;vertical-align:middle">'+tl+'</span></div><div class="fr">'+(f.cargo||'—')+(rl?' · '+rl:'')+'</div></div><div class="ft"><div class="fv">'+fmt(tot)+'</div><div class="fc">'+ct+' lanc.</div></div><button class="btn-g btn-sm" onclick="event.stopPropagation();delFunc('+f.id+')"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg></button></div>'}).join('')+'</div>'}
+function openMdl(id){var f=fbi(id);if(!f)return;var gs=S.G.filter(function(g){return g.func_id===f.id}).sort(function(a,b){return b.data.localeCompare(a.data)});var tot=gs.reduce(function(s,g){return s+parseFloat(g.valor)},0);var bc={};gs.forEach(function(g){bc[g.cat]=(bc[g.cat]||0)+parseFloat(g.valor)});var dt=[...new Set(gs.filter(function(g){return g.cat==='custo'}).map(function(g){return g.data}))].length;var tl=f.tipo==='diaria'?'Diarista':'Mensalista';var tc=f.tipo==='diaria'?'#5b21b6':'var(--green)';var tb=f.tipo==='diaria'?'#ede9fe':'var(--gl)';var ri=f.tipo==='diaria'?'<div style="font-size:12px;margin-top:4px;color:var(--gm)">Diaria: <strong style="color:#5b21b6;font-family:var(--mono)">'+fmt(f.salario)+'</strong> Dias: <strong style="color:#5b21b6">'+dt+'</strong> Total: <strong style="color:#5b21b6;font-family:var(--mono)">'+fmt(f.salario*dt)+'</strong></div>':(f.salario>0?'<div style="font-size:12px;color:var(--green);margin-top:3px;font-family:var(--mono)">Salario: '+fmt(f.salario)+'</div>':'');document.getElementById('mdl-t').textContent=f.nome;document.getElementById('mdl-b').innerHTML='<div style="display:flex;align-items:center;gap:14px;margin-bottom:1rem"><div class="av" style="width:52px;height:52px;font-size:17px">'+ini(f.nome)+'</div><div><div style="font-weight:700;font-size:15px">'+f.nome+' <span style="background:'+tb+';color:'+tc+';font-size:10px;padding:2px 7px;border-radius:10px;font-weight:600;vertical-align:middle">'+tl+'</span></div><div style="font-size:12px;color:var(--gm)">'+(f.cargo||'—')+'</div>'+ri+'</div></div><div class="metrics" style="grid-template-columns:repeat(3,1fr);margin-bottom:1rem"><div class="mc"><div class="ml">Total</div><div class="mv g" style="font-size:18px">'+fmt(tot)+'</div></div><div class="mc"><div class="ml">Lancamentos</div><div class="mv" style="font-size:18px">'+gs.length+'</div></div>'+(f.tipo==='diaria'?'<div class="mc"><div class="ml">Dias Trab.</div><div class="mv" style="font-size:18px;color:#5b21b6">'+dt+'</div></div>':'<div class="mc"><div class="ml">Categorias</div><div class="mv" style="font-size:18px">'+Object.keys(bc).length+'</div></div>')+'</div>'+(Object.keys(bc).length?'<div class="sl">Por categoria</div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1rem">'+Object.entries(bc).sort(function(a,b){return b[1]-a[1]}).map(function(e){return'<span class="badge '+(CB[e[0]]||'bo')+'">'+(CL[e[0]]||e[0])+': '+fmt(e[1])+'</span>'}).join('')+'</div>':'')+tbl(gs.slice(0,20),false);document.getElementById('mdl').classList.add('on')}
+function closeMdl(){document.getElementById('mdl').classList.remove('on')}
+(async function(){try{await loadAll();popFS();rDash()}catch(e){document.getElementById('db-warn').innerHTML='<div class="dberr"><strong>Erro de conexao com o banco.</strong> Configure DATABASE_URL no Railway (Variables > Add Variable Reference > PostgreSQL > DATABASE_URL).<br><small>'+e.message+'</small></div>';['dash-m','dash-c','dash-f','dash-r'].forEach(function(id){document.getElementById(id).innerHTML=''});console.error(e)}})();
+</script>
+</body>
+</html>
